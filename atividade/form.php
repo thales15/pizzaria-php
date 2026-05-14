@@ -21,18 +21,7 @@ $nome = htmlspecialchars(trim($nome));
 $ingredientes = htmlspecialchars($ingredientes);
 $descricao = htmlspecialchars($descricao);
 
-if (!empty($nome) && !empty($ingredientes) && !empty($preco) && !empty($descricao)) {
-    $pizza = R::dispense('pizza');
-    $pizza['nome'] = $nome;
-    $pizza['ingredientes'] = $ingredientes;
-    $pizza['tamanho'] = $tamanhoSelected;
-    $pizza['preco'] = $preco;
-    $pizza['descricao'] = $descricao;
 
-    R::store($pizza);
-
-    $mensagem = "Pizza cadastrada com sucesso! <br> Dados: <br> Nome: $nome; <br> Ingredientes: $ingredientes; <br> Tamanho: $tamanho; <br> Preço: $preco; <br> Descrição: $descricao.";
-}
 
 ?>
 
@@ -68,14 +57,14 @@ if (!empty($nome) && !empty($ingredientes) && !empty($preco) && !empty($descrica
         <select name="tamanho" required>
             <option value="">Tamanho..</option>
             <?php foreach ($tamanhos as $key => $value): ?>
-                <option value="<?= $key ?>" <?php ($tamanhoSelected == $key) ? 'selected' : '' ?>>
+                <option value="<?= $key ?>" <?php ($tamanhoSelected == $key) ? "selected" : "" ?>>
                     <?= $value ?>
                 </option>
             <?php endforeach; ?>
         </select> <br>
 
         <label>Preço<span class="require">*</span></label><br>
-        <input type="number" value="<?= $preco ?>" required><br> <br>
+        <input type="number" name="preco" value="<?= $preco ?>" required><br> <br>
 
         <label>Descrição<span class="require">*</span></label>
         <p>*Serve para colocar no cardápio com o intuido de atrair o paladar do cliente*</p>
@@ -84,7 +73,24 @@ if (!empty($nome) && !empty($ingredientes) && !empty($preco) && !empty($descrica
         <input type="submit" name="button" value="Cadastrar">
     </form>
 
-    <?= $mensagem?>
+    <?php
+    if ($_POST['button'] === "Cadastrar") {
+        if (!empty($nome) && !empty($ingredientes) && !empty($preco) && !empty($descricao)) {
+
+            $pizza = R::dispense('pizza');
+            $pizza['nome'] = $nome;
+            $pizza['ingredientes'] = $ingredientes;
+            $pizza['tamanho'] = $tamanhoSelected;
+            $pizza['preco'] = $preco;
+            $pizza['descricao'] = $descricao;
+
+            R::store($pizza);
+
+            $mensagem = "Pizza cadastrada com sucesso! <br> Dados: <br> Nome: $nome; <br> Ingredientes: $ingredientes; <br> Tamanho: $tamanhoSelected; <br> Preço: $preco; <br> Descrição: $descricao.";
+        }
+    }
+    ?>
+    <?= $mensagem ?>
 
 </body>
 
