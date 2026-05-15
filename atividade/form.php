@@ -1,6 +1,6 @@
 <?php
 
-include "connection.php";
+include "./connection.php";
 
 $mensagem = "A mensagem aparecerá aqui";
 
