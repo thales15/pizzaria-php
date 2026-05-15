@@ -1,4 +1,19 @@
-<?php include "./connection.php" ?>
+<?php include "./connection.php" ;
+
+if($_GET["del"] == 'sucess'){
+    echo "Dado deletado com sucesso";
+}
+
+if($_GET["del"] == "fail"){
+    echo "Erro ao deletar dado";
+}
+
+if($_GET["insert"] == "success"){
+    echo "pizza cadastrada com sucesso";
+}
+
+?>
+
 
 
 <!DOCTYPE html>
@@ -11,6 +26,8 @@
 </head>
 
 <body>
+
+<a href="form.php">Formulário</a>
 
     <table border="1" cellpadding="10">
         <tr>
@@ -34,11 +51,13 @@
                 <td><?= $item['tamanho'] ?></td>
                 <td><?= $item['descricao'] ?></td>
                 <td><a href="form.php?linha=<?= $item['id'] ?>">Editar</a></td>
-                <td><input type="submit" name="delete" value="Deletar"></td>
+                <td><a href="delete.php?dado=<?= $item['id']?>">Deletar</a></td>
             </tr>
+
+            
         <?php endforeach; ?>
 
-
+        
 
     </table>
 
