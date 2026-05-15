@@ -11,15 +11,19 @@ $tamanhos = [
     "Gigante" => "Gigante",
 ];
 
-$nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
-$ingredientes = isset($_POST["ingredientes"]) ? $_POST["ingredientes"] : "";
-$tamanhoSelected = isset($_POST["tamanho"]) ? $_POST["tamanho"] : "";
-$preco = isset($_POST["preco"]) ? $_POST["preco"] : "";
-$descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
+$pizza = R::load('pizza', $_GET['linha']);
+
+$nome = isset($_POST["nome"]) ? $_POST["nome"] : (!empty($pizza) ? $pizza["nome"] : "");
+$ingredientes = isset($_POST["ingredientes"]) ? $_POST["ingredientes"] : (!empty( $pizza) ? $pizza["ingredientes"] :"");
+$tamanhoSelected = isset($_POST["tamanho"]) ? $_POST["tamanho"] : (!empty( $pizza) ? $pizza["tamanho"] :"");
+$preco = isset($_POST["preco"]) ? $_POST["preco"] : (!empty( $pizza )? $pizza["preco"] :"");
+$descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : (!empty( $pizza) ? $pizza["descricao"] :"");
 
 $nome = htmlspecialchars(trim($nome));
 $ingredientes = htmlspecialchars($ingredientes);
 $descricao = htmlspecialchars($descricao);
+
+
 
 
 

@@ -33,7 +33,7 @@
                 <td><?= $item['preco'] ?></td>
                 <td><?= $item['tamanho'] ?></td>
                 <td><?= $item['descricao'] ?></td>
-                <td><input type="submit" name="edit" value="Editar"></td>
+                <td><a href="form.php?linha=<?= $item['id'] ?>">Editar</a></td>
                 <td><input type="submit" name="delete" value="Deletar"></td>
             </tr>
         <?php endforeach; ?>
